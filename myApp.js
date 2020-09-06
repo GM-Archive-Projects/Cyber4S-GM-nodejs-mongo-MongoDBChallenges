@@ -198,7 +198,7 @@ var findEditThenSave = function (personId, done) {
 
 var findAndUpdate = function (personName, done) {
   var ageToSet = 20;
-  Person.findOneAndUpdate({name: personName} {age: ageToSet}, {new: true}, (err, result) => {
+  Person.findOneAndUpdate({name: personName}, {age: ageToSet}, {new: true}, (err, result) => {
     if(!err){
       done(null, result)
     }
