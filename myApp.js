@@ -24,7 +24,11 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
    age: {type: Number},
    favoriteFoods: [String]
   })
-
+  personSchema.set("toJSON", {
+    transform: (document, returnedObject) => {
+      delete returnedObject.__v;
+    },
+  });
 const Model = (name, schema) => mongoose.model(name, schema);
 
   
@@ -48,11 +52,17 @@ let Person = Model('Person', personSchema)
 // person.save(function(err, data) {
 //    ...do your stuff here...
 // });
-
 var createAndSavePerson = function(done) {
-  
-  done(null /*, data*/);
-
+  let newPerson = new Person({
+    name: "Gal Moshkovitz",
+    age: "24",
+    favoriteFoods: ["Meet", "Schawarma"]
+  })
+  newPerson.save((err, savedPerson) => {
+    if(!err) {
+        done(null, savedPerson);
+      };
+    })
 };
 
 /** 4) Create many People with `Model.create()` */
@@ -65,10 +75,29 @@ var createAndSavePerson = function(done) {
 // Model.create() with the argument arrayOfPeople.
 // Note: You can reuse the model you instantiated in the previous exercise.
 
+var arrayOfPeople = [
+  {
+    name: "Guy Moshkovitz",
+    age: "36",
+    favoriteFoods: ["Meet", "Salad"]
+  },
+  {
+    name: "Ziv Moshkovitz",
+    age: "33",
+    favoriteFoods: ["Meet", "Vodka"]
+  },
+  {
+    name: "Or Moshkovitz",
+    age: "29",
+    favoriteFoods: ["Meet", "Money"]
+  }
+]
 var createManyPeople = function(arrayOfPeople, done) {
-    
-    done(null/*, data*/);
-    
+    Person.create(arrayOfPeople, (err, people) => {
+      if(!err){
+        done(null, people)
+      }
+    })
 };
 
 /** # C[R]UD part II - READ #
