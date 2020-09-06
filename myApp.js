@@ -66,15 +66,6 @@ var createAndSavePerson = function(done) {
 };
 
 /** 4) Create many People with `Model.create()` */
-
-// Sometimes you need to create many Instances of your Models,
-// e.g. when seeding a database with initial data. `Model.create()`
-// takes an array of objects like [{name: 'John', ...}, {...}, ...],
-// as the 1st argument, and saves them all in the db.
-// Modify the createManyPeople function to create many people using
-// Model.create() with the argument arrayOfPeople.
-// Note: You can reuse the model you instantiated in the previous exercise.
-
 var arrayOfPeople = [
   {
     name: "Guy Moshkovitz",
