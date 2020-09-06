@@ -103,9 +103,11 @@ var createManyPeople = function(arrayOfPeople, done) {
 // Use the function argument `personName` as search key.
 
 var findPeopleByName = function(personName, done) {
-  
-  done(null/*, data*/);
-
+  Person.find({name: personName}, (err, foundPerson) => {
+    if(!err){
+      done(null, foundPerson)
+    }
+  })
 };
 
 /** 6) Use `Model.findOne()` */
@@ -118,9 +120,11 @@ var findPeopleByName = function(personName, done) {
 // argument `food` as search key
 
 var findOneByFood = function(food, done) {
-
-  done(null/*, data*/);
-  
+  Person.findOne({favoriteFoods: food}, (err, result) => {
+    if(!err) {
+      done(null, result)
+    }
+  })
 };
 
 /** 7) Use `Model.findById()` */
@@ -133,11 +137,12 @@ var findOneByFood = function(food, done) {
 // Use the function argument 'personId' as search key.
 
 var findPersonById = function(personId, done) {
-  
-  done(null/*, data*/);
-  
+  Person.findOne({_id: personId}, (err, result) => {
+    if(!err) {
+      done(null, result)
+    }
+  })
 };
-
 /** # CR[U]D part III - UPDATE # 
 /*  ============================ */
 
