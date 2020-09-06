@@ -234,9 +234,12 @@ var removeById = function (personId, done) {
 // Don't forget to pass it to the `done()` callback, since we use it in tests.
 
 var removeManyPeople = function (done) {
-	var nameToRemove = "Mary";
-
-	done(null /*, data*/);
+  const nameToRemove = "Mary";
+  Person.remove({name: nameToRemove}, (err, result) => {
+    if(!err){
+      done(null , result);
+    }
+  })
 };
 
 /** # C[R]UD part V -  More about Queries # 
